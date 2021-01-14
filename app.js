@@ -1,55 +1,25 @@
-/**/
-const express = require('express')
-const app = express()
+var express = require('express')
+  , Koa = require('koa')
+  , nodeMyAdmin = require('node-mysql-admin');
+  
+const app = new Koa();
+const expressApp = express();
+expressApp.use(nodeMyAdmin(expressApp));
 
-app.get("/", function(req, res) {
-    //when we get an http get request to the root/homepage
-    res.send("Hello express");
+app.use(function*(next) {
+	// do routing by simple matching, koa-route may also work
+	if (this.path.startsWith('/myadmin')) {
+		// direct to express
+		if (this.status === 404 || this.status === '404') {
+			delete this.res.statusCode
+		}
+		// stop koa future processing (NOTE not sure it is un-doc feature or not?)
+		this.respond = false
+		// pass req and res to express
+		expressApp(this.req, this.res)
+	} else {
+		// go to next middleware
+		yield next
+	}
 });
-
-module.exports = app
-
-
-
-// git add . && git commit -m "Update" && git push -u origin main
-/*
-const aedes = require('aedes')()
-const server = require('net').createServer(aedes.handle)
-const port = 80
-
-server.listen(port, function () {
-  console.log('server started and listening on port ', port)
-})
-*/
-
-/** 
-let http = require('http'),
-port = 8080;//process.env.PORT || process.argv[2] || 8080;
-let server = http.createServer(function (req, res) { 
-        res.writeHead(200, {
-            'Content-Type': 'text/plain'
-        });
-        res.write('hello Vercel!', 'utf-8');
-        res.end();
- 
-    });
- 
-server.listen(port, function () { 
-    console.log('app up on port: ' + port); 
-});
-
-*/
-/** 
-const WebSocket = require('ws');
- 
-const wss = new WebSocket.Server({ port: 80 });
- 
-wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
-    ws.send(message);
-  });
- 
- // ws.send('something');
-});
-*/
+app.listen(3333);
