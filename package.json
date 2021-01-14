@@ -1,0 +1,19 @@
+{
+  "name": "demovercel",
+  "version": "1.0.0",
+  "description": "demovercel",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "aedes": "^0.44.0",
+    "mqtt": "^4.2.5",
+    "server-factory": "^0.1.0",
+    "ws": "^7.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
