@@ -1,7 +1,0 @@
-{
-  "version": 2,
-  "name": "node-admin",
-  "builds": [
-    { "src": "./**/*.js", "use": "@vercel/node" }
-  ]
-}
