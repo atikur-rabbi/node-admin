@@ -14,11 +14,11 @@ require("./startup/db")();
 app.use(express.json());
 app.use(cors());
 
-app.get('/hello', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.use("/", swaggerRoutes.routes);
+app.use("/docs", swaggerRoutes.routes);
 app.use("/api", authRoutes.routes);
 app.use("/api", userRoutes.routes);
 
