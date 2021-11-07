@@ -8,7 +8,7 @@
       "email": "atik@we2app.com"
     }
   },
-  "host": "127.0.0.1:3000",
+  "host": "node-admin.vercel.app",
   "basePath": "/api",
   "securityDefinitions": {
     "JWT": {
