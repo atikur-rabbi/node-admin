@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const env = require("../config");
+const config = require("config");
 
 const { User } = require("../models/user");
 
@@ -14,7 +14,7 @@ const authToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, env.jwtPrivateKey);
+    const decoded = jwt.verify(token, config.get("jwtPrivateKey"));
     req.user = decoded;
     next();
   } catch (error) {

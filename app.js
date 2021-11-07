@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const app = express()
 const env = require("./config");
+const error = require("./middleware/error");
 
 const swaggerRoutes = require("./routes/swagger-routes");
 const authRoutes = require("./routes/auth-routes");
@@ -13,14 +14,19 @@ require("./startup/db")();
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static("./public"));
+app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
+app.get('/hello', (req, res) => {
   res.send('Hello World!')
 })
 
 app.use("/docs", swaggerRoutes.routes);
 app.use("/api", authRoutes.routes);
 app.use("/api", userRoutes.routes);
+
+
+app.use(error);
 
 app.listen(env.port, () => {
   console.log((`Example app listening at ${chalk.green(`http://${env.host}:${env.port}`)} `))
