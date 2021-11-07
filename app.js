@@ -1,11 +1,15 @@
-const express = require('express')
+const express = require('express');
+const chalk = require('chalk');
+
 const app = express()
-const port = 3000
+const env = require("./config");
+const host = env.host;
+const port = env.port;
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log((`Example app listening at ${chalk.green(`http://${host}:${port}`)} `))
 })
