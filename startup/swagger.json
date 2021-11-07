@@ -1,0 +1,156 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "eduiot api",
+    "version": "1.0.0",
+    "description": "Api for eduiot.",
+    "contact": {
+      "email": "atik@we2app.com"
+    }
+  },
+  "host": "node-admin.vercel.app",
+  "basePath": "/api",
+  "securityDefinitions": {
+    "JWT": {
+      "type": "apiKey",
+      "name": "x-auth-token",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create login",
+        "operationId": "createLogin",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create user",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "delete": {
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Soft delete user (Require login and admin role)",
+        "operationId": "deleteCourseById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "nama": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "user",
+            "admin"
+          ]
+        }
+      },
+      "required": [
+        "nama",
+        "email",
+        "password",
+        "role"
+      ]
+    }
+  }
+}
