@@ -20,19 +20,19 @@ const login = async (req, res, next) => {
   if (!user) {
     return res.status(404).send({
       code: "error",
-      message: "Email tidak terdaftar",
+      message: "Email is not registered",
     });
   }
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
-    return res.status(404).send({ code: "error", message: "Password salah" });
+    return res.status(404).send({ code: "error", message: "Password wrong" });
   }
 
   const token = user.generateAuthToken();
   res.status(200).send({
     code: "success",
-    message: "Login berhasil",
+    message: "Login successful",
     role: user.role,
     token: token,
   });

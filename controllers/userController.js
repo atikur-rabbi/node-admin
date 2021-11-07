@@ -20,7 +20,7 @@ const createUser = async (req, res, next) => {
   if (user) {
     return res.status(400).send({
       code: "error",
-      message: "Email ini sudah terdaftar",
+      message: "This email is already registered",
     });
   }
 
@@ -37,7 +37,7 @@ const createUser = async (req, res, next) => {
     .status(200)
     .send({
       code: "success",
-      message: "User berhasil dibuat",
+      message: "User created successfully",
       data: _.pick(user, ["_id", "nama", "email"]),
     });
 };
@@ -47,7 +47,7 @@ const deleteUser = async (req, res, next) => {
   if (!user) {
     return res.status(401).send({
       code: "error",
-      message: "User tidak ditemukan",
+      message: "User not found",
     });
   }
 
@@ -58,7 +58,7 @@ const deleteUser = async (req, res, next) => {
 
   res.status(200).send({
     code: "success",
-    message: "User berhasil dihapus",
+    message: "User deleted successfully",
     data: user,
   });
 };
