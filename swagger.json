@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "eduiot api",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Api for eduiot.",
     "contact": {
       "email": "atik@we2app.com"
